@@ -36,3 +36,187 @@
   </form>
 
  [解説]
+☆ form要素
+
+・action属性：データを送信するWebサーバとプログラムを指定する。
+              →通常、フォームを表示するHTMLファイルと
+                データを利用するプログラムは同じサーバで保存されるため、
+                相対パスで指定する。
+
+・method属性：ブラウザからデータの渡し方を指定する。
+→属性値
+  ・get ：送信されるリクエストのURLと送信データが同じデータの塊になる。
+         [例] https://www.google.com/search?q=yahoo
+
+          → 情報がブラウザのアドレス欄に表示されるので、第3者から容易に
+             確認されてしまう。
+          → 一般的なブラウザではURLの長さに制限があるため、短めの単語や
+             番号などの送信に摘記した送信方法
+
+  ・post：URLとは別の領域にデータが格納されて送信される。
+          → 入力内容がURLに表示されることはなく、かなり長いデータも送信
+             することができる。
+
+☆ label要素：キャプションやタイトルを表現
+
+・ for属性：フォームの部品との関連付け
+            →フォームの部品に設定されたid属性値で、部品を識別する。
+
+※ label要素の内容として関連付けることも可能（この場合、id属性は不要）。※場所をlabelで囲って指定しているため。
+ [例] <label>指名：<input type="text" name="username" /></label>
+        ｜←-----------------------------------------------→｜
+
+☆ input要素：入力部品
+
+・type属性：入力部品の種類は、type属性で指定する。
+
+  属性値  ：部品
+  -------------------------------------------------
+  text    ：1行文のテキスト入力欄
+  password：パスワード入力欄、入力値は伏字になる！
+  number  ：数値の入力欄、数値以外の入力不可！
+  email   ：メールアドレス入力欄、＠の記載の有無で妥当性を確認！
+  url     ：URLの入力欄、プロトコルの記載の有無で妥当性を確認！
+  radio   ：ラジオボタン（オプションボタン）
+  checkbox：チェックボックス
+  hidden  ：部品を表示せずに（隠し部品で）データを指定できる。
+  submit  ：送信ボタン
+  reset   ：リセットボタン
+  -------------------------------------------------
+  メモ）上記以外にもHTML5で定義されている（https://www.htmq.com/html/#for)
+        しかしながら、
+        ・必ずしも表示されるとは限らない。
+        ・表示されてもブラウザごとに外見や挙動が異なる場合がある。
+        ・同じブラウザでバージョンの違いによって異なる場合がある。
+        など、要確認してから使用を決める必要あり！
+
+・name属性 ：部品の名前、この名前とデータが対になって送信される。
+            [例] http://www.google.com/search?q=yahoo
+                                                     →部品の名前：q
+                                                     →入力値：yahoo
+
+ [演習]
+・ファイル名 ：sample41_form.html
+上記のソースファイルにGoogle検索できる検索フォーム機能を追加してみよう
+
+
+【ラジオボタン、チェックボックス】
+ [体験]
+・ ファイル名 ：sample42_radiocheck.html
+・ タイトル   ：フォームの演習
+・ 見出し     ：ラジオボタンとチェックボックス
+・ form 要素  ：
+<form action="cgi/****.java method="post">
+    <p><label>ラジオボタン1：
+       <input type="radio" name="radio1" value="ラジオ1" checked /></label>
+       <label>ラジオボタン2：
+       <input type="radio" name="radio1" value="ラジオ2" /></label>
+    </p>
+  <fieldset><legend>グループ名</legend>
+    <p><label>ラジオボタン3：
+       <input type="radio" name="radio2" value="ラジオ3" checked /></label>
+       <label>ラジオボタン4：
+       <input type="radio" name="radio2" value="ラジオ4" /></label></p>
+    <p><label>チェックボックス：
+       <input type="checkbox" name="check" /></label></p>
+  </fieldset>
+  <p><input type="submit" value="送信" /></p>
+</form>
+
+ [解説]
+★ラジオボタン
+
+・name 属性：同じ属性値（同じ名前）のラジオボタンが、同じグループになる。
+            →1つのラジオボタンをオンにすると、他のラジオボタンはオフになる。
+
+・value属性：Webサーバに送信するデータを指定する。
+            →ラジオボタンがオフのデータは送信されない。
+
+メモ）通常、ラジオボタンは単体で使うことはない！
+      オフからオンにした場合、オフに戻すことができないため、
+      単体で項目を選択するときは、チェックボックスを使う。
+
+☆ fieldset要素
+
+・複数の部品を境界線で囲み、同じグループのように表現する。
+
+  ※ name属性が異なるラジオボタンは同じグループにはならない！
+
+  ☆ legend要素
+
+  ・ fieldset要素のグループのキャプションを表示する。
+     → fieldset要素の内容として、先頭に記述する必要がある。
+        通常、legend要素の内容は、境界線の「左上」に表示される。
+
+★ チェックボックス
+
+・name 属性：ラジオボタンのようにname属性でグループ化はできない。
+           →単体でリオ牛、それぞれオン・オフを表示する。
+
+・value属性：Webサーバに送信するデータを指定する。
+           →ラジオボタンのようにオフのデータは送信されない。
+
+※共通（ラジオボタン・チェックボックス）
+
+・checked属性：予めオンの状態にしておく。
+
+
+【セレクトボックス、テキストエリア】
+ [体験]
+・ファイル名：sample43_selectarea.html
+・タイトル  ：フォームの演習
+・見出し    ：セレクトボックスとテキストエリア
+・form 要素 ：
+  <form action="cgi/****.java method"post">
+    <p><label for="room">ベッドの種類を選択してください：</label>
+      <select name="room" id="room">
+        <option value="single" selected>シングル</option>
+        <option value="semi">セミダブル</option>
+        <option value="double">ダブル</option>
+      </select></p>
+    <p><label for="food">お食事を選択してください（複数選択可）：</label>
+       <select name="food[]" multiple size="2" id="food">
+                   //配列のイメージ※nameの要素に[]をつける
+                   //sizeの要素は0からではなく、2ならそのまま2行となる。
+         <option value="breakfast">朝食</option>
+         <option value="dinner">夕食</option>
+         <option value="supper">夜食</option>
+       </select></p>
+    <p><label for="demand">ご要望があれば記述してください：</label><br />
+       <textarea name="demand" cols="40" raw="4" id="demand"
+        placeholder="入力ガイド">初期入力値</textarea></p>
+        //           何も入力されない時は「入力ガイド」が表示される。
+    <p><input type="submit" value="送信" /></p>
+  </form>
+
+ [解説]
+★ セレクトボックス：プルダウンメニュー/リスト形式の選択領域を作成
+
+☆ select要素
+
+・ name 属性   ：この名前と選択項目が対になって送信される。
+
+・ multiple属性：複数の項目を1度に選択可能。
+   →name属性値には、複数選択を表す[]をつける（例. name="food[]"）。
+   →size属性  ：1つ以上の整数を指定するとスクロール可能なリスト表示になる。
+                 指定した行数分の項目領域が確保される。
+                 size属性を指定しない場合、4が指定されているとみなされる。
+
+メモ）multiple属性やsize属性の挙動は、ブラウザによって多少異なる場合がある。
+
+☆ option要素 ：選択項目の指定
+
+・value 属性  ：項目のもつ値を指定する。
+               →省略した場合、option要素の内容が値になる。
+
+・selected属性：予めそのoption要素を選択した状態にしておく。
+
+★テキストエリア：複数行のテキストが入力可能な入力欄
+
+☆ textarea要素
+
+・cols属性、rows属性：前者は1行あたりの文字数、後者は行数を指定する。
+
+・他の属性
+→maxlength  属性：入力可能な最大文字数を指定する。
+→placeholder属性：入力欄に薄い色で属性値を入力ガイドとして表示する。
